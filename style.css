@@ -1,0 +1,235 @@
+:root {
+  --color-bg: #fdf8ef;
+  --color-text: #4a3c2a;
+  --color-muted: #8a7a5e;
+  --color-accent: #c9a96b;
+  --color-accent-deep: #a8843d;
+  --color-success: #6b8e5a;
+  --color-error: #b85c5c;
+  --color-surface: #ffffff;
+  --color-shadow: rgba(168, 132, 61, 0.18);
+
+  --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 50% 32%, rgba(201, 169, 107, 0.22), transparent 62%),
+    radial-gradient(circle at 80% 90%, rgba(201, 169, 107, 0.12), transparent 60%),
+    var(--color-bg);
+}
+
+.app {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 24px 28px;
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.header__names {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--color-text);
+}
+
+.header__divider {
+  display: block;
+  width: 56px;
+  height: 1px;
+  margin: 16px auto;
+  background: var(--color-accent);
+  opacity: 0.6;
+}
+
+.header__date {
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.uploader {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  position: relative;
+}
+
+.upload-btn {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: var(--color-surface);
+  color: var(--color-accent-deep);
+  font-family: var(--font-serif);
+  font-size: 108px;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow:
+    0 24px 48px -16px var(--color-shadow),
+    0 0 0 1px rgba(201, 169, 107, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.25s ease, color 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.upload-btn::before {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 169, 107, 0.25);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.upload-btn:active {
+  transform: scale(0.97);
+}
+
+.upload-btn .icon {
+  display: none;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.upload-btn[data-state="idle"] .icon-plus,
+.upload-btn[data-state="uploading"] .icon-plus {
+  display: inline;
+}
+
+.upload-btn[data-state="uploading"] {
+  opacity: 0.65;
+  cursor: progress;
+}
+
+.upload-btn[data-state="success"] {
+  background: var(--color-success);
+  color: #ffffff;
+}
+
+.upload-btn[data-state="success"] .icon-check {
+  display: inline;
+  font-size: 92px;
+}
+
+.upload-btn[data-state="error"] {
+  background: var(--color-error);
+  color: #ffffff;
+}
+
+.upload-btn[data-state="error"] .icon-retry {
+  display: inline;
+  font-size: 88px;
+}
+
+.status {
+  min-height: 28px;
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.status[data-state="success"] {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 22px;
+  letter-spacing: 0.02em;
+  color: var(--color-success);
+}
+
+.status[data-state="error"] {
+  color: var(--color-error);
+}
+
+.thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 16px 4px 4px;
+  margin-top: 8px;
+  scrollbar-width: none;
+}
+
+.thumbs::-webkit-scrollbar {
+  display: none;
+}
+
+.thumb {
+  flex: 0 0 auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 6px 14px -6px var(--color-shadow);
+}
+
+.file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@media (min-width: 600px) {
+  .header__names {
+    font-size: 44px;
+  }
+  .upload-btn {
+    width: 260px;
+    height: 260px;
+    font-size: 124px;
+  }
+  .upload-btn[data-state="success"] .icon-check {
+    font-size: 108px;
+  }
+  .upload-btn[data-state="error"] .icon-retry {
+    font-size: 100px;
+  }
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#fdf8ef" />
+  <title>Düğün Fotoğrafları</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <h1 class="header__names" data-couple-names></h1>
+      <span class="header__divider" aria-hidden="true"></span>
+      <p class="header__date" data-wedding-date></p>
+    </header>
+
+    <section class="uploader">
+      <button
+        type="button"
+        class="upload-btn"
+        data-state="idle"
+        data-upload-button
+        aria-label="Fotoğraf yükle"
+      >
+        <span class="icon icon-plus" aria-hidden="true">+</span>
+        <span class="icon icon-check" aria-hidden="true">✓</span>
+        <span class="icon icon-retry" aria-hidden="true">↻</span>
+      </button>
+      <p class="status" data-state="idle" data-status></p>
+      <input
+        type="file"
+        class="file-input"
+        accept="image/*"
+        capture="environment"
+        multiple
+        data-file-input
+      />
+    </section>
+
+    <section class="thumbs" data-thumbs aria-label="Yüklenen fotoğraflar"></section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
