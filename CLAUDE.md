@@ -67,8 +67,8 @@ All config lives as top-of-file constants. No env files, no config files.
 
 ```js
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/REPLACE_WITH_DEPLOYMENT_ID/exec";
-const COUPLE_NAMES    = "Ayşe & Mehmet";
-const WEDDING_DATE    = "15 Haziran 2025";
+const COUPLE_NAMES    = "Burak & Berna";
+const WEDDING_DATE    = "11 Temmuz 2026";
 ```
 
 **`apps-script/Code.gs` constants:**
@@ -146,8 +146,9 @@ This is a portfolio piece. Tag milestones.
 - Commit + tag `v0.2-frontend`.
 
 ### Faz 3 — Wire
-- Replace `APPS_SCRIPT_URL` with the real deployment URL locally (NOT committed to repo — keep placeholder in tracked file, set real URL in a `.env`-style local override or just edit before deploy).
-- Actually: simpler — keep the real URL in a separate untracked `app.config.js` and have `app.js` import from it. Or just document that the URL gets pasted into `app.js` at deploy time. Pick whichever is cleaner and document it.
+- **Decision:** `APPS_SCRIPT_URL` is committed directly. It is not a secret — the Apps Script web app is deployed with "Anyone" access (anonymous POST is the whole point), and every guest scans the same QR pointing at the same URL. No `.env`, no `app.config.js`, no local override.
+- Replace `APPS_SCRIPT_URL` in `app.js` with the real deployment URL.
+- Update `COUPLE_NAMES` and `WEDDING_DATE` for the actual event.
 - Test end-to-end from a real phone.
 - Commit + tag `v0.3-wired`.
 

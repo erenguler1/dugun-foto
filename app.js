@@ -1,6 +1,6 @@
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/REPLACE_WITH_DEPLOYMENT_ID/exec";
-const COUPLE_NAMES    = "Ayşe & Mehmet";
-const WEDDING_DATE    = "15 Haziran 2025";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxjWvRY8UZOhedYInBA5AqyOue-OWC0mgS513fRM7NpRvzFnrWlOw9YaO2A5I5OCIpk/exec";
+const COUPLE_NAMES    = "Burak & Berna";
+const WEDDING_DATE    = "11 Temmuz 2026";
 
 const coupleNamesEl = document.querySelector("[data-couple-names]");
 const weddingDateEl = document.querySelector("[data-wedding-date]");
