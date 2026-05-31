@@ -95,7 +95,7 @@ These placeholders stay as `REPLACE_WITH_...` in the repo. They're filled in onl
 - One screen, no routing.
 - Header: couple name + date (from constants).
 - A single large round `+` button center-screen. Tappable area minimum 200×200px.
-- Tapping `+` opens the native file picker with `accept="image/*"` and `multiple`. Use `capture="environment"` so iOS/Android also offer the camera.
+- Tapping `+` opens the native file picker with `accept="image/*"` and `multiple`. **Do not** set the `capture` attribute — it forces the camera and hides the gallery option on iOS/Android. Without it, the native picker offers both "Photo Library" and "Take Photo".
 - On selection: convert each file to base64, POST to `APPS_SCRIPT_URL` one by one, show progress as `n/total`.
 - Success state: green checkmark, "Teşekkürler" message, auto-reset after ~2.5s.
 - Failure state: red, retry option.
