@@ -77,7 +77,7 @@ const WEDDING_DATE    = "11 Temmuz 2026";
 const FOLDER_ID = "REPLACE_WITH_DRIVE_FOLDER_ID";
 ```
 
-These placeholders stay as `REPLACE_WITH_...` in the repo. They're filled in only on the deployed copies (Apps Script editor + the Vercel build).
+Of these, only `FOLDER_ID` is still a `REPLACE_WITH_...` placeholder in this repo. The real Drive folder ID lives only in the Apps Script editor — it is pasted in at deploy time and never committed, because `apps-script/Code.gs` here is reference source, not the deployed artifact. `APPS_SCRIPT_URL`, `COUPLE_NAMES`, and `WEDDING_DATE` are committed with their real production values; the URL is shown as a placeholder above for readability, but per the Faz 3 decision the real endpoint is public (Anyone access) and safe to commit.
 
 ## Apps Script behavior
 

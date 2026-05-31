@@ -18,9 +18,11 @@ Tek bir düğün günü için kullanılan statik fotoğraf toplama sitesi. Davet
 
 Küçük bir PNG'yi base64'e çevirip aşağıdaki komutla deploy URL'ine POST atabilirsin. `Content-Type` bilinçli olarak `text/plain` — Apps Script CORS preflight'ı düzgün işlemediği için "simple request" tutuyoruz.
 
+Apps Script `POST`'a `302` ile cevap verip isteği `script.googleusercontent.com` altına yönlendiriyor. curl varsayılan olarak yönlendirmede POST'u GET'e dönüştürdüğü için yanıt Drive'ın 404 sayfası oluyor. `--post301 --post302 --post303` flag'leri redirect'ten sonra da POST'u koruyor.
+
 ```bash
 DATA=$(base64 -i test.png)
-curl -L -X POST \
+curl -L --post301 --post302 --post303 -X POST \
   -H "Content-Type: text/plain" \
   -d "{\"filename\":\"test.png\",\"mimeType\":\"image/png\",\"data\":\"$DATA\"}" \
   "https://script.google.com/macros/s/REPLACE_WITH_DEPLOYMENT_ID/exec"
