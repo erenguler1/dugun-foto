@@ -1,9 +1,11 @@
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxjWvRY8UZOhedYInBA5AqyOue-OWC0mgS513fRM7NpRvzFnrWlOw9YaO2A5I5OCIpk/exec";
-const COUPLE_NAMES    = "Burak & Berna";
-const WEDDING_DATE    = "11 Temmuz 2026";
 
-const coupleNamesEl = document.querySelector("[data-couple-names]");
-const weddingDateEl = document.querySelector("[data-wedding-date]");
+const WEDDING_DATETIME = "2026-07-11T19:00:00+03:00";
+const KINA_MAPS = "https://www.google.com/maps/search/?api=1&query=" +
+  encodeURIComponent("Düzköy Öğretmen Evi Trabzon");
+const DUGUN_MAPS = "https://www.google.com/maps/search/?api=1&query=" +
+  encodeURIComponent("VAV BAHÇE Aşağı Söğütönü 1040. Sokak Tepebaşı Eskişehir");
+
 const uploadButton  = document.querySelector("[data-upload-button]");
 const fileInput     = document.querySelector("[data-file-input]");
 const statusEl      = document.querySelector("[data-status]");
@@ -11,9 +13,40 @@ const thumbsEl      = document.querySelector("[data-thumbs]");
 
 let resetTimer = null;
 
-coupleNamesEl.textContent = COUPLE_NAMES;
-weddingDateEl.textContent = WEDDING_DATE;
+// ── Maps links ──────────────────────────────────────
+document.querySelector("[data-kina-maps]").href = KINA_MAPS;
+document.querySelector("[data-dugun-maps]").href = DUGUN_MAPS;
 
+// ── Countdown ───────────────────────────────────────
+const weddingTime = new Date(WEDDING_DATETIME).getTime();
+const cdDaysEl    = document.querySelector("[data-cd-days]");
+const cdHoursEl   = document.querySelector("[data-cd-hours]");
+const cdMinutesEl = document.querySelector("[data-cd-minutes]");
+const cdSecondsEl = document.querySelector("[data-cd-seconds]");
+
+function pad(value) {
+  return String(value).padStart(2, "0");
+}
+
+function updateCountdown() {
+  const diff = weddingTime - Date.now();
+  if (diff <= 0) {
+    cdDaysEl.textContent = "00";
+    cdHoursEl.textContent = "00";
+    cdMinutesEl.textContent = "00";
+    cdSecondsEl.textContent = "00";
+    return;
+  }
+  cdDaysEl.textContent = pad(Math.floor(diff / 86400000));
+  cdHoursEl.textContent = pad(Math.floor((diff % 86400000) / 3600000));
+  cdMinutesEl.textContent = pad(Math.floor((diff % 3600000) / 60000));
+  cdSecondsEl.textContent = pad(Math.floor((diff % 60000) / 1000));
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── Upload ──────────────────────────────────────────
 uploadButton.addEventListener("click", () => {
   if (uploadButton.dataset.state === "uploading") return;
   fileInput.click();

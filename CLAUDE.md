@@ -66,10 +66,18 @@ All config lives as top-of-file constants. No env files, no config files.
 **`app.js` constants block:**
 
 ```js
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/REPLACE_WITH_DEPLOYMENT_ID/exec";
-const COUPLE_NAMES    = "Burak & Berna";
-const WEDDING_DATE    = "11 Temmuz 2026";
+const APPS_SCRIPT_URL  = "https://script.google.com/macros/s/REPLACE_WITH_DEPLOYMENT_ID/exec";
+const WEDDING_DATETIME = "2026-07-11T19:00:00+03:00";
+const KINA_MAPS        = "https://www.google.com/maps/search/?api=1&query=" +
+  encodeURIComponent("Düzköy Öğretmen Evi Trabzon");
+const DUGUN_MAPS       = "https://www.google.com/maps/search/?api=1&query=" +
+  encodeURIComponent("VAV BAHÇE Aşağı Söğütönü 1040. Sokak Tepebaşı Eskişehir");
 ```
+
+- `WEDDING_DATETIME` — ISO 8601 with the `+03:00` Türkiye offset; drives the live countdown (`Gün : Saat : Dakika : Saniye`).
+- `KINA_MAPS` / `DUGUN_MAPS` — Google Maps search URLs for the two "Konum Bilgisi" pills. Built from `encodeURIComponent`-wrapped venue queries, not hardcoded coordinates.
+
+All other display text (couple names, family names, event dates/times/venues, section headings) is hardcoded directly in `index.html` — there are no `COUPLE_NAMES` / `WEDDING_DATE` constants anymore.
 
 **`apps-script/Code.gs` constants:**
 
@@ -91,17 +99,17 @@ Of these, only `FOLDER_ID` is still a `REPLACE_WITH_...` placeholder in this rep
 
 ## Frontend behavior
 
-- Mobile-first. Designed for ~375px width baseline.
-- One screen, no routing.
-- Header: couple name + date (from constants).
-- A single large round `+` button center-screen. Tappable area minimum 200×200px.
-- Tapping `+` opens the native file picker with `accept="image/*"` and `multiple`. **Do not** set the `capture` attribute — it forces the camera and hides the gallery option on iOS/Android. Without it, the native picker offers both "Photo Library" and "Take Photo".
-- On selection: convert each file to base64, POST to `APPS_SCRIPT_URL` one by one, show progress as `n/total`.
-- Success state: green checkmark, "Teşekkürler" message, auto-reset after ~2.5s.
-- Failure state: red, retry option.
-- Below the button: a strip of thumbnails of what was uploaded *this session only* (in-memory, no persistence).
-- Aesthetic: warm, wedding-appropriate. Cream/gold palette. Serif headings. No emoji-as-decoration. Decorative dots/glows are OK if subtle.
-- No name field, no captions, no login, no gallery view. The `+` button is the entire app.
+- Mobile-first. Single scrolling page, no routing. Centered, `max-width: 560px` container.
+- The page is a digital wedding invitation built from `reference/wedding-invite.jsx` (a React mockup, translated to vanilla HTML/CSS/JS). Sections, top to bottom:
+  1. **GİRİŞ (splash)** — fullscreen, centered: heart image + "Berna & Burak" (script font) + "11.07.2026" + an animated scroll-hint dot at the bottom.
+  2. **Hero** — small uppercase "Davetlisiniz" label, then a diagonal stack of names: "Berna" (offset left) → "&" (center) → "Burak" (offset right).
+  3. **Families** — 3-column grid: "Nazife & Engin BEKAR" | heart image | "Aysel & Mustafa GÜLER".
+  4. **Geri Sayım** — live countdown to `WEDDING_DATETIME`, ticking every second, format `Gün : Saat : Dakika : Saniye`. Each unit zero-padded to 2 digits; uses `tabular-nums` so digits don't shift width. Clamps to `00 : 00 : 00 : 00` once the date passes.
+  5. **Events** — KINA and DÜĞÜN cards side by side, each ending in a "Konum Bilgisi" pill that links (`target="_blank"`) to the corresponding Google Maps URL (`KINA_MAPS` / `DUGUN_MAPS`).
+  6. **Anılarınızı Paylaşın (upload)** — the photo-collection feature. A round `+` button opens the native file picker (`accept="image/*"`, `multiple`). **Do not** set the `capture` attribute — it forces the camera and hides the gallery option on iOS/Android. On selection: convert each file to base64, POST to `APPS_SCRIPT_URL` one by one, show progress as `n/total`. Success → button fills, "Teşekkürler", auto-reset after ~2.5s. Failure → "N/M fotoğraf yüklenemedi · tekrar dene". Below: a strip of thumbnails of what was uploaded *this session only* (in-memory, no persistence).
+- Upload mechanics (`uploadFile`, `readAsBase64`, the sequential loop, the `text/plain` POST) are unchanged from the original `+`-only app — only the surrounding page changed.
+- Aesthetic: warm cream (`--bg: #f5f2ec`) on dark ink (`--ink: #2a1f10`). Script font for names/headings, serif for countdown numerals, sans for labels. No emoji-as-decoration.
+- **Fonts:** "Marck Script" (Google Fonts) is a **temporary stand-in** for "Billion Miracles" (Mäns Greback's commercial font). When the license is acquired, drop the `.woff2` in, wire it via `@font-face`, and prepend it to `--font-script`. Until then the free Marck Script + `Sacramento`/`Allura` fallbacks carry the script look.
 
 ## Gotchas / non-obvious decisions
 

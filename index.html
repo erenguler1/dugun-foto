@@ -3,34 +3,131 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#fdf8ef" />
-  <title>Düğün Fotoğrafları</title>
+  <meta name="theme-color" content="#f5f2ec" />
+  <title>Berna &amp; Burak — Davetiye</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Marck+Script&family=Sacramento&family=Inter:wght@300;400;500;600&display=swap" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="app">
-    <header class="header">
-      <h1 class="header__names" data-couple-names></h1>
-      <span class="header__divider" aria-hidden="true"></span>
-      <p class="header__date" data-wedding-date></p>
+  <div class="page">
+
+    <!-- GİRİŞ — splash -->
+    <section class="splash">
+      <img src="assets/heart.png" alt="" class="splash__heart" />
+      <h1 class="splash__couple">Berna &amp; Burak</h1>
+      <p class="splash__date">11.07.2026</p>
+      <div class="scroll-hint" aria-hidden="true">
+        <span class="scroll-hint__dot"></span>
+      </div>
+    </section>
+
+    <!-- HERO — davetlisiniz -->
+    <header class="hero">
+      <p class="hero__intro">Davetlisiniz</p>
+      <h2 class="hero__couple">
+        <span class="hero__bride">Berna</span>
+        <span class="hero__amp">&amp;</span>
+        <span class="hero__groom">Burak</span>
+      </h2>
     </header>
 
-    <section class="uploader">
+    <!-- FAMILIES + HEART -->
+    <section class="families">
+      <div class="family">
+        <p class="family__parents">Nazife &amp; Engin</p>
+        <p class="family__surname">BEKAR</p>
+      </div>
+
+      <div class="family-heart-wrap">
+        <img src="assets/heart.png" alt="" class="family__heart" />
+      </div>
+
+      <div class="family">
+        <p class="family__parents">Aysel &amp; Mustafa</p>
+        <p class="family__surname">GÜLER</p>
+      </div>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section class="countdown">
+      <h2 class="countdown__title">Geri Sayım</h2>
+      <div class="countdown__row">
+        <div class="countdown__unit">
+          <div class="countdown__num" data-cd-days>00</div>
+          <div class="countdown__label">Gün</div>
+        </div>
+        <div class="countdown__colon">:</div>
+        <div class="countdown__unit">
+          <div class="countdown__num" data-cd-hours>00</div>
+          <div class="countdown__label">Saat</div>
+        </div>
+        <div class="countdown__colon">:</div>
+        <div class="countdown__unit">
+          <div class="countdown__num" data-cd-minutes>00</div>
+          <div class="countdown__label">Dakika</div>
+        </div>
+        <div class="countdown__colon">:</div>
+        <div class="countdown__unit">
+          <div class="countdown__num" data-cd-seconds>00</div>
+          <div class="countdown__label">Saniye</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="events">
+      <article class="event-card">
+        <h3 class="event__title">KINA</h3>
+        <div class="event__date">04.07.2026</div>
+        <div class="event__time">19:00 — 23:00</div>
+        <div class="event__day">Cumartesi</div>
+        <div class="event__venue">Düzköy Öğretmen Evi Arkası</div>
+        <div class="event__city">Düzköy / Trabzon</div>
+        <a class="event__map" data-kina-maps target="_blank" rel="noopener noreferrer">
+          <svg class="event__pin" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          Konum Bilgisi
+        </a>
+      </article>
+
+      <article class="event-card">
+        <h3 class="event__title">DÜĞÜN</h3>
+        <div class="event__date">11.07.2026</div>
+        <div class="event__time">19:00 — 23:00</div>
+        <div class="event__day">Cumartesi</div>
+        <div class="event__venue">VAV BAHÇE</div>
+        <div class="event__address">Aşağı Söğütönü, 1040. Sk.</div>
+        <div class="event__city">Tepebaşı / Eskişehir</div>
+        <a class="event__map" data-dugun-maps target="_blank" rel="noopener noreferrer">
+          <svg class="event__pin" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          Konum Bilgisi
+        </a>
+      </article>
+    </section>
+
+    <!-- UPLOAD -->
+    <section class="upload">
+      <h2 class="upload__title">Anılarınızı Paylaşın</h2>
+      <p class="upload__sub">Çektiğiniz fotoğrafları yükleyerek bu özel günün hatırasında yer alın</p>
       <button
         type="button"
-        class="upload-btn"
+        class="upload__btn"
         data-state="idle"
         data-upload-button
         aria-label="Fotoğraf yükle"
       >
-        <span class="icon icon-plus" aria-hidden="true">+</span>
-        <span class="icon icon-check" aria-hidden="true">✓</span>
-        <span class="icon icon-retry" aria-hidden="true">↻</span>
+        <span class="upload__icon upload__icon--plus" aria-hidden="true">+</span>
+        <span class="upload__icon upload__icon--check" aria-hidden="true">✓</span>
+        <span class="upload__icon upload__icon--retry" aria-hidden="true">↻</span>
       </button>
-      <p class="status" data-state="idle" data-status></p>
+      <p class="upload__status" data-state="idle" data-status></p>
       <input
         type="file"
         class="file-input"
@@ -38,10 +135,10 @@
         multiple
         data-file-input
       />
+      <div class="thumbs" data-thumbs aria-label="Yüklenen fotoğraflar"></div>
     </section>
 
-    <section class="thumbs" data-thumbs aria-label="Yüklenen fotoğraflar"></section>
-  </main>
+  </div>
 
   <script src="app.js"></script>
 </body>

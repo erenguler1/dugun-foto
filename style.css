@@ -1,16 +1,13 @@
 :root {
-  --color-bg: #fdf8ef;
-  --color-text: #4a3c2a;
-  --color-muted: #8a7a5e;
-  --color-accent: #c9a96b;
-  --color-accent-deep: #a8843d;
-  --color-success: #6b8e5a;
-  --color-error: #b85c5c;
-  --color-surface: #ffffff;
-  --color-shadow: rgba(168, 132, 61, 0.18);
+  --bg: #f5f2ec;
+  --ink: #2a1f10;
+  --ink-soft: #6b5d44;
 
-  --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  /* Lisans alınınca FONT_SCRIPT'in başına 'Billion Miracles' eklenecek —
+     şu an en yakın ücretsiz Google Font alternatifi Marck Script. */
+  --font-script: "Marck Script", "Sacramento", "Allura", cursive;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Inter", -apple-system, sans-serif;
 }
 
 * {
@@ -21,175 +18,445 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  min-height: 100vh;
-  min-height: 100dvh;
-  background:
-    radial-gradient(circle at 50% 32%, rgba(201, 169, 107, 0.22), transparent 62%),
-    radial-gradient(circle at 80% 90%, rgba(201, 169, 107, 0.12), transparent 60%),
-    var(--color-bg);
+  background: var(--bg);
 }
 
-.app {
+.page {
   min-height: 100vh;
   min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  padding: 40px 24px 28px;
-  max-width: 480px;
-  width: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
   margin: 0 auto;
+  max-width: 560px;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
 }
 
-.header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.header__names {
-  font-family: var(--font-serif);
-  font-size: 36px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  line-height: 1.1;
-  margin: 0;
-  color: var(--color-text);
-}
-
-.header__divider {
-  display: block;
-  width: 56px;
-  height: 1px;
-  margin: 16px auto;
-  background: var(--color-accent);
-  opacity: 0.6;
-}
-
-.header__date {
-  font-size: 12px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  margin: 0;
-}
-
-.uploader {
-  flex: 1;
+/* ── GİRİŞ — splash ───────────────────────────────── */
+.splash {
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 28px;
+  padding: 40px 32px;
   position: relative;
 }
 
-.upload-btn {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  border: none;
-  padding: 0;
-  background: var(--color-surface);
-  color: var(--color-accent-deep);
-  font-family: var(--font-serif);
-  font-size: 108px;
-  font-weight: 300;
+.splash__heart {
+  width: min(72%, 280px);
+  height: auto;
+  display: block;
+  margin-bottom: 32px;
+}
+
+.splash__couple {
+  font-family: var(--font-script);
+  font-size: 64px;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0 0 18px;
   line-height: 1;
-  cursor: pointer;
-  box-shadow:
-    0 24px 48px -16px var(--color-shadow),
-    0 0 0 1px rgba(201, 169, 107, 0.28),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.25s ease, color 0.25s ease;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+.splash__date {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: 0.32em;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 32px;
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  opacity: 0.35;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+.scroll-hint__dot {
+  width: 3px;
+  height: 8px;
+  background: var(--ink);
+  border-radius: 2px;
+  animation: scrollHint 1.6s ease-in-out infinite;
+}
+
+@keyframes scrollHint {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 0.4;
+  }
+}
+
+/* ── HERO — davetlisiniz ──────────────────────────── */
+.hero {
+  text-align: center;
+  padding: 80px 32px 0;
+}
+
+.hero__intro {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 56px;
+  font-weight: 400;
+}
+
+.hero__couple {
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.95;
+}
+
+.hero__bride {
+  font-size: 86px;
+  transform: translateX(-48px);
+  margin-bottom: -14px;
+}
+
+.hero__amp {
+  font-family: var(--font-script);
+  font-size: 68px;
+  color: var(--ink);
+  margin: -14px 0 -18px;
+  line-height: 1;
+}
+
+.hero__groom {
+  font-size: 86px;
+  transform: translateX(48px);
+  margin-top: -14px;
+}
+
+/* ── FAMILIES ─────────────────────────────────────── */
+.families {
+  display: grid;
+  grid-template-columns: 1fr 130px 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 64px 32px 72px;
+}
+
+.family {
+  text-align: center;
+}
+
+.family__parents {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+
+.family__surname {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: 0.18em;
+}
+
+.family-heart-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.family__heart {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── COUNTDOWN ────────────────────────────────────── */
+.countdown {
+  text-align: center;
+  padding: 0 32px 64px;
+}
+
+.countdown__title {
+  font-family: var(--font-script);
+  font-size: 54px;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0 0 24px;
+  line-height: 0.95;
+}
+
+.countdown__row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+}
+
+.countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 56px;
+}
+
+.countdown__num {
+  font-family: var(--font-serif);
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown__label {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 10px;
+}
+
+.countdown__colon {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  color: var(--ink);
+  opacity: 0.3;
+  padding-top: 3px;
+}
+
+/* ── EVENTS ───────────────────────────────────────── */
+.events {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 0 32px 64px;
+  text-align: center;
+}
+
+.event-card {
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.event__title {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.32em;
+  margin: 0 0 14px;
+}
+
+.event__date {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.event__time {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.event__day {
+  font-family: var(--font-script);
+  font-size: 30px;
+  color: var(--ink);
+  line-height: 0.95;
+  margin-bottom: 14px;
+}
+
+.event__venue {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 3px;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.event__address {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 2px;
+  line-height: 1.35;
+}
+
+.event__city {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+
+.event__map {
+  margin-top: 8px;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   -webkit-tap-highlight-color: transparent;
 }
 
-.upload-btn::before {
-  content: "";
-  position: absolute;
-  inset: -18px;
-  border-radius: 50%;
-  border: 1px solid rgba(201, 169, 107, 0.25);
-  opacity: 0.6;
-  pointer-events: none;
+.event__pin {
+  flex: 0 0 auto;
 }
 
-.upload-btn:active {
+/* ── UPLOAD ───────────────────────────────────────── */
+.upload {
+  text-align: center;
+  padding: 16px 32px 64px;
+}
+
+.upload__title {
+  font-family: var(--font-script);
+  font-size: 60px;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0 0 10px;
+  line-height: 0.95;
+}
+
+.upload__sub {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin: 0 auto 28px;
+  max-width: 300px;
+  line-height: 1.55;
+}
+
+.upload__btn {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.upload__btn:active {
   transform: scale(0.97);
 }
 
-.upload-btn .icon {
+.upload__icon {
   display: none;
   line-height: 1;
   pointer-events: none;
 }
 
-.upload-btn[data-state="idle"] .icon-plus,
-.upload-btn[data-state="uploading"] .icon-plus {
+.upload__btn[data-state="idle"] .upload__icon--plus,
+.upload__btn[data-state="uploading"] .upload__icon--plus {
   display: inline;
 }
 
-.upload-btn[data-state="uploading"] {
-  opacity: 0.65;
+.upload__btn[data-state="uploading"] {
+  opacity: 0.5;
   cursor: progress;
 }
 
-.upload-btn[data-state="success"] {
-  background: var(--color-success);
-  color: #ffffff;
+.upload__btn[data-state="success"] {
+  background: var(--ink);
+  color: #fff;
 }
 
-.upload-btn[data-state="success"] .icon-check {
+.upload__btn[data-state="success"] .upload__icon--check {
   display: inline;
-  font-size: 92px;
 }
 
-.upload-btn[data-state="error"] {
-  background: var(--color-error);
-  color: #ffffff;
+.upload__btn[data-state="error"] {
+  border-color: var(--ink);
 }
 
-.upload-btn[data-state="error"] .icon-retry {
+.upload__btn[data-state="error"] .upload__icon--retry {
   display: inline;
-  font-size: 88px;
+  font-size: 46px;
 }
 
-.status {
-  min-height: 28px;
-  margin: 0;
-  font-size: 14px;
-  letter-spacing: 0.06em;
-  color: var(--color-muted);
-  text-align: center;
+.upload__status {
+  font-family: var(--font-script);
+  font-size: 28px;
+  color: var(--ink);
+  min-height: 32px;
+  margin-top: 12px;
+  margin-bottom: 0;
+  line-height: 1;
 }
 
-.status[data-state="success"] {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 22px;
+.upload__status[data-state="error"] {
+  font-family: var(--font-sans);
+  font-size: 13px;
   letter-spacing: 0.02em;
-  color: var(--color-success);
 }
 
-.status[data-state="error"] {
-  color: var(--color-error);
-}
-
+/* ── THUMBS ───────────────────────────────────────── */
 .thumbs {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding: 16px 4px 4px;
-  margin-top: 8px;
+  padding: 0 4px;
+  margin-top: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
   scrollbar-width: none;
 }
 
@@ -203,7 +470,6 @@ body {
   height: 64px;
   border-radius: 10px;
   object-fit: cover;
-  box-shadow: 0 6px 14px -6px var(--color-shadow);
 }
 
 .file-input {
@@ -215,21 +481,4 @@ body {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-}
-
-@media (min-width: 600px) {
-  .header__names {
-    font-size: 44px;
-  }
-  .upload-btn {
-    width: 260px;
-    height: 260px;
-    font-size: 124px;
-  }
-  .upload-btn[data-state="success"] .icon-check {
-    font-size: 108px;
-  }
-  .upload-btn[data-state="error"] .icon-retry {
-    font-size: 100px;
-  }
 }
