@@ -11,17 +11,17 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="page">
+  <div class="cover" id="cover">
+    <img src="assets/heart.png" class="cover-heart" alt="" />
+    <button class="seal-button" id="sealButton" aria-label="Davetiyeyi aç">
+      <img src="assets/seal.png" alt="" />
+    </button>
+    <p class="cover-hint">Zarfı açmak için dokunun</p>
+    <h1 class="cover-couple">Berna &amp; Burak</h1>
+    <p class="cover-date">11.07.2026</p>
+  </div>
 
-    <!-- GİRİŞ — splash -->
-    <section class="splash">
-      <img src="assets/heart.png" alt="" class="splash__heart" />
-      <h1 class="splash__couple">Berna &amp; Burak</h1>
-      <p class="splash__date">11.07.2026</p>
-      <div class="scroll-hint" aria-hidden="true">
-        <span class="scroll-hint__dot"></span>
-      </div>
-    </section>
+  <div class="invitation">
 
     <!-- HERO — davetlisiniz -->
     <header class="hero">
@@ -47,32 +47,6 @@
       <div class="family">
         <p class="family__parents">Aysel &amp; Mustafa</p>
         <p class="family__surname">GÜLER</p>
-      </div>
-    </section>
-
-    <!-- COUNTDOWN -->
-    <section class="countdown">
-      <h2 class="countdown__title">Geri Sayım</h2>
-      <div class="countdown__row">
-        <div class="countdown__unit">
-          <div class="countdown__num" data-cd-days>00</div>
-          <div class="countdown__label">Gün</div>
-        </div>
-        <div class="countdown__colon">:</div>
-        <div class="countdown__unit">
-          <div class="countdown__num" data-cd-hours>00</div>
-          <div class="countdown__label">Saat</div>
-        </div>
-        <div class="countdown__colon">:</div>
-        <div class="countdown__unit">
-          <div class="countdown__num" data-cd-minutes>00</div>
-          <div class="countdown__label">Dakika</div>
-        </div>
-        <div class="countdown__colon">:</div>
-        <div class="countdown__unit">
-          <div class="countdown__num" data-cd-seconds>00</div>
-          <div class="countdown__label">Saniye</div>
-        </div>
       </div>
     </section>
 
@@ -110,6 +84,32 @@
           Konum Bilgisi
         </a>
       </article>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section class="countdown">
+      <h2 class="countdown__title">Geri Sayım</h2>
+      <div class="countdown__row">
+        <div class="countdown__unit">
+          <div class="countdown__num" data-cd-days>00</div>
+          <div class="countdown__label">Gün</div>
+        </div>
+        <div class="countdown__colon">:</div>
+        <div class="countdown__unit">
+          <div class="countdown__num" data-cd-hours>00</div>
+          <div class="countdown__label">Saat</div>
+        </div>
+        <div class="countdown__colon">:</div>
+        <div class="countdown__unit">
+          <div class="countdown__num" data-cd-minutes>00</div>
+          <div class="countdown__label">Dakika</div>
+        </div>
+        <div class="countdown__colon">:</div>
+        <div class="countdown__unit">
+          <div class="countdown__num" data-cd-seconds>00</div>
+          <div class="countdown__label">Saniye</div>
+        </div>
+      </div>
     </section>
 
     <!-- UPLOAD -->

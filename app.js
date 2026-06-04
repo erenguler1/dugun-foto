@@ -6,6 +6,22 @@ const KINA_MAPS = "https://www.google.com/maps/search/?api=1&query=" +
 const DUGUN_MAPS = "https://www.google.com/maps/search/?api=1&query=" +
   encodeURIComponent("VAV BAHÇE Aşağı Söğütönü 1040. Sokak Tepebaşı Eskişehir");
 
+// ── Envelope cover (wax seal) ───────────────────────
+const cover = document.getElementById('cover');
+const sealButton = document.getElementById('sealButton');
+document.body.style.overflow = 'hidden';
+if (sealButton && cover) {
+  sealButton.addEventListener('click', () => {
+    sealButton.classList.add('breaking');
+    setTimeout(() => cover.classList.add('opening'), 300);
+    setTimeout(() => {
+      cover.style.display = 'none';
+      document.body.style.overflow = '';
+      window.scrollTo(0, 0);
+    }, 1150);
+  });
+}
+
 const uploadButton  = document.querySelector("[data-upload-button]");
 const fileInput     = document.querySelector("[data-file-input]");
 const statusEl      = document.querySelector("[data-status]");

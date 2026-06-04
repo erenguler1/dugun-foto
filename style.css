@@ -24,7 +24,7 @@ body {
   background: var(--bg);
 }
 
-.page {
+.invitation {
   min-height: 100vh;
   min-height: 100dvh;
   background: var(--bg);
@@ -36,78 +36,112 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── GİRİŞ — splash ───────────────────────────────── */
-.splash {
-  min-height: 100vh;
-  min-height: 100dvh;
+/* ── COVER — wax seal envelope ────────────────────── */
+.cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--bg);
+  z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 40px 32px;
-  position: relative;
+  box-sizing: border-box;
+  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-.splash__heart {
-  width: min(72%, 280px);
+.cover.opening {
+  transform: translateY(-100vh);
+}
+
+.cover-heart {
+  width: min(58%, 230px);
   height: auto;
   display: block;
-  margin-bottom: 32px;
+  margin-top: -40px;
+  margin-bottom: 28px;
 }
 
-.splash__couple {
-  font-family: var(--font-script);
-  font-size: 64px;
-  font-weight: 400;
+.seal-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.seal-button:hover,
+.seal-button:focus-visible {
+  transform: scale(1.04);
+  outline: none;
+}
+
+.seal-button img {
+  width: 110px;
+  height: auto;
+  display: block;
+}
+
+.seal-button.breaking {
+  animation: sealBreak 0.4s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes sealBreak {
+  0% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+  45% {
+    transform: scale(1.12) rotate(-4deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8) rotate(12deg);
+    opacity: 0;
+  }
+}
+
+.cover-hint {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
   color: var(--ink);
-  margin: 0 0 18px;
+  margin: 18px 0 36px;
+  animation: pulseHint 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseHint {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.cover-couple {
+  font-family: var(--font-script);
+  font-size: 56px;
   line-height: 1;
-  letter-spacing: 0.01em;
+  margin: 0 0 14px;
+  color: var(--ink);
   text-align: center;
 }
 
-.splash__date {
+.cover-date {
   font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.32em;
   color: var(--ink);
   margin: 0;
-  letter-spacing: 0.32em;
-}
-
-.scroll-hint {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 32px;
-  border: 1.5px solid var(--ink);
-  border-radius: 10px;
-  opacity: 0.35;
-  display: flex;
-  justify-content: center;
-  padding-top: 6px;
-}
-
-.scroll-hint__dot {
-  width: 3px;
-  height: 8px;
-  background: var(--ink);
-  border-radius: 2px;
-  animation: scrollHint 1.6s ease-in-out infinite;
-}
-
-@keyframes scrollHint {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(8px);
-    opacity: 0.4;
-  }
 }
 
 /* ── HERO — davetlisiniz ──────────────────────────── */
@@ -262,6 +296,7 @@ body {
   gap: 8px;
   padding: 0 32px 64px;
   text-align: center;
+  align-items: stretch;
 }
 
 .event-card {
@@ -269,6 +304,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
 }
 
 .event__title {
@@ -329,7 +365,7 @@ body {
 }
 
 .event__map {
-  margin-top: 8px;
+  margin-top: auto;
   display: inline-flex;
   align-items: center;
   gap: 6px;
