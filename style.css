@@ -382,6 +382,15 @@ body {
   text-transform: uppercase;
   -webkit-tap-highlight-color: transparent;
 }
+.events-note {
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--ink);
+  margin: -32px 32px 56px;
+  letter-spacing: 0.04em;
+  font-style: italic;
+}
 
 .event__pin {
   flex: 0 0 auto;
