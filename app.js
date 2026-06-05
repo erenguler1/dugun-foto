@@ -6,19 +6,48 @@ const KINA_MAPS = "https://www.google.com/maps/search/?api=1&query=" +
 const DUGUN_MAPS = "https://www.google.com/maps/search/?api=1&query=" +
   encodeURIComponent("VAV BAHÇE Aşağı Söğütönü 1040. Sokak Tepebaşı Eskişehir");
 
-// ── Envelope cover (wax seal) ───────────────────────
+// ── Envelope cover (wax seal + flap) ─────────────────
 const cover = document.getElementById('cover');
 const sealButton = document.getElementById('sealButton');
+const music = document.getElementById('musicAudio');
+
 document.body.style.overflow = 'hidden';
+
 if (sealButton && cover) {
   sealButton.addEventListener('click', () => {
     sealButton.classList.add('breaking');
-    setTimeout(() => cover.classList.add('opening'), 300);
+    // Flap rotates back
+    setTimeout(() => cover.classList.add('flap-open'), 250);
+    // Start music
+    setTimeout(() => {
+      if (music) {
+        music.volume = 0.6;
+        music.play().catch(() => {});
+        const btn = document.getElementById('musicToggle');
+        if (btn) btn.classList.add('playing');
+      }
+    }, 800);
+    // Fade out cover entirely
+    setTimeout(() => cover.classList.add('gone'), 1500);
     setTimeout(() => {
       cover.style.display = 'none';
       document.body.style.overflow = '';
-      window.scrollTo(0, 0);
-    }, 1150);
+    }, 2300);
+  });
+}
+
+// Music toggle
+const musicToggle = document.getElementById('musicToggle');
+if (musicToggle && music) {
+  setTimeout(() => musicToggle.classList.add('visible'), 1200);
+  musicToggle.addEventListener('click', () => {
+    if (music.paused) {
+      music.play().catch(() => {});
+      musicToggle.classList.add('playing');
+    } else {
+      music.pause();
+      musicToggle.classList.remove('playing');
+    }
   });
 }
 

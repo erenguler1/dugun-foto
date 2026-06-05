@@ -7,12 +7,19 @@
   <title>Berna &amp; Burak — Davetiye</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Marck+Script&family=Sacramento&family=Inter:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Italianno&family=Sacramento&family=Inter:wght@300;400;500;600&display=swap" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <audio id="musicAudio" src="assets/music.mp3" loop preload="auto"></audio>
+
   <div class="cover" id="cover">
-    <img src="assets/heart.png" class="cover-heart" alt="" />
+    <div class="cover-flap" id="coverFlap">
+      <div class="cover-flap-front">
+        <img src="assets/heart.png" class="flap-heart" alt="" />
+      </div>
+      <div class="cover-flap-back"></div>
+    </div>
     <button class="seal-button" id="sealButton" aria-label="Davetiyeyi aç">
       <img src="assets/seal.png" alt="" />
     </button>
@@ -22,6 +29,12 @@
   </div>
 
   <div class="invitation">
+
+    <button class="music-toggle" id="musicToggle" aria-label="Müzik" type="button">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M9 3v12.5A3.5 3.5 0 1 0 11 19V6h7V3H9z"/>
+      </svg>
+    </button>
 
     <!-- HERO — davetlisiniz -->
     <header class="hero">
