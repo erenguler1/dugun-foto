@@ -250,14 +250,14 @@ body.cover-opening .invitation {
   font-family: var(--font-script);
   font-size: 80px;
   color: var(--ink);
-  margin: -14px 0 -18px;
+  margin: co-4px 0;
   line-height: 1;
 }
 
 .hero__groom {
   font-size: 100px;
   transform: translateX(48px);
-  margin-top: -14px;
+  margin-top: 0;
 }
 
 /* ── FAMILIES ─────────────────────────────────────── */
