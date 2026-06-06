@@ -12,7 +12,27 @@ const sealBtn = document.getElementById('sealBtn');
 const skipButton = document.getElementById('skipButton');
 const music = document.getElementById('musicAudio');
 
-document.body.style.overflow = 'hidden';
+function lockScroll() {
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.top = '0';
+  document.body.style.left = '0';
+  document.body.style.right = '0';
+  document.body.style.width = '100%';
+}
+
+function unlockScroll() {
+  document.documentElement.style.overflow = '';
+  document.body.style.overflow = '';
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = '';
+  document.body.style.right = '';
+  document.body.style.width = '';
+}
+
+lockScroll();
 
 function startMusic() {
   if (!music) return;
@@ -29,7 +49,7 @@ function dismissCover() {
   startMusic();
   setTimeout(() => {
     cover.style.display = 'none';
-    document.body.style.overflow = '';
+    unlockScroll();
   }, 1000);
 }
 
