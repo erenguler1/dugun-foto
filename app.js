@@ -6,35 +6,47 @@ const KINA_MAPS = "https://www.google.com/maps/search/?api=1&query=" +
 const DUGUN_MAPS = "https://www.google.com/maps/search/?api=1&query=" +
   encodeURIComponent("VAV BAHÇE Aşağı Söğütönü 1040. Sokak Tepebaşı Eskişehir");
 
-// ── Envelope cover (wax seal + flap) ─────────────────
+// ── Cover (wax seal) ───────────────────────
 const cover = document.getElementById('cover');
-const sealButton = document.getElementById('sealButton');
+const waxSeal = document.getElementById('waxSeal');
+const skipButton = document.getElementById('skipButton');
 const music = document.getElementById('musicAudio');
 
 document.body.style.overflow = 'hidden';
 
-if (sealButton && cover) {
-  sealButton.addEventListener('click', () => {
-    sealButton.classList.add('breaking');
-    document.body.classList.add('cover-opening');
-    // Flap rotates back
-    setTimeout(() => cover.classList.add('flap-open'), 250);
-    // Start music
-    setTimeout(() => {
-      if (music) {
-        music.volume = 0.6;
-        music.play().catch(() => {});
-        const btn = document.getElementById('musicToggle');
-        if (btn) btn.classList.add('playing');
-      }
-    }, 800);
-    // Fade out cover entirely
-    setTimeout(() => cover.classList.add('gone'), 1700);
+function startMusic() {
+  if (!music) return;
+  music.volume = 0.6;
+  music.play().catch(() => {});
+  const btn = document.getElementById('musicToggle');
+  if (btn) btn.classList.add('playing');
+}
+
+function openInvitation(animated) {
+  document.body.classList.add('cover-opening');
+  if (animated) {
+    waxSeal.classList.add('breaking');
+    setTimeout(() => cover.classList.add('gone'), 400);
+    setTimeout(startMusic, 500);
     setTimeout(() => {
       cover.style.display = 'none';
       document.body.style.overflow = '';
-    }, 2500);
-  });
+    }, 1400);
+  } else {
+    cover.classList.add('gone');
+    startMusic();
+    setTimeout(() => {
+      cover.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 900);
+  }
+}
+
+if (waxSeal && cover) {
+  waxSeal.addEventListener('click', () => openInvitation(true));
+}
+if (skipButton && cover) {
+  skipButton.addEventListener('click', () => openInvitation(false));
 }
 
 // Music toggle
