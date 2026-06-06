@@ -36,134 +36,70 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── COVER — wax seal ──────────────────────────────── */
+/* ── COVER — video ─────────────────────────────────── */
 .cover {
   position: fixed;
   top: 0; left: 0;
   width: 100%;
   height: 100vh;
-  background-color: var(--bg);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background: var(--bg);
   z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 40px 24px;
+  justify-content: flex-end;
+  padding: 0 24px 96px;
   box-sizing: border-box;
   overflow: hidden;
-  transition: opacity 0.8s ease;
+  transition: opacity 0.9s ease;
 }
-
-/* ── Envelope folding creases (X-pattern + subtle flap shading) ─── */
-.cover::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image:
-    /* 4 flap surfaces — very subtle tonal difference */
-    conic-gradient(from 45deg at 50% 50%,
-      rgba(255, 250, 240, 0.05) 0deg 90deg,
-      rgba(40, 30, 15, 0.025) 90deg 180deg,
-      rgba(40, 30, 15, 0.06) 180deg 270deg,
-      rgba(40, 30, 15, 0.025) 270deg 360deg),
-    /* X crease — diagonal "/" line */
-    linear-gradient(to top right,
-      transparent calc(50% - 0.6px),
-      rgba(60, 40, 20, 0.11) 50%,
-      transparent calc(50% + 0.6px)),
-    /* X crease — diagonal "\" line */
-    linear-gradient(to bottom right,
-      transparent calc(50% - 0.6px),
-      rgba(60, 40, 20, 0.11) 50%,
-      transparent calc(50% + 0.6px));
-}
-
-/* Seal + tagline + skip must sit ABOVE the crease overlay */
-.wax-seal,
-.cover-tagline {
-  position: relative;
-  z-index: 2;
-}
-.skip-button { z-index: 2; }
 
 .cover.gone {
   opacity: 0;
   pointer-events: none;
 }
 
-.wax-seal {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.wax-seal:hover,
-.wax-seal:focus-visible {
-  transform: scale(1.04);
-  outline: none;
-}
-
-.wax-seal img {
-  width: min(45vw, 220px);
-  height: auto;
-  display: block;
-  filter: drop-shadow(0 10px 22px rgba(60, 20, 24, 0.35));
-}
-
-/* ── Zoom-through animation: scale + opacity ──────────── */
-.cover.zooming {
-  animation: coverZoomFade 1.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+.cover-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
   pointer-events: none;
 }
 
-.cover.zooming .wax-seal img {
-  animation: sealZoom 1.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.cover.zooming .cover-tagline,
-.cover.zooming .skip-button,
-.cover.zooming::before {
-  animation: textFadeOut 0.35s ease forwards;
-}
-
-@keyframes sealZoom {
-  0%   { transform: scale(1); opacity: 1; }
-  55%  { transform: scale(7); opacity: 0.55; }
-  100% { transform: scale(30); opacity: 0; }
-}
-
-@keyframes coverZoomFade {
-  0%   { opacity: 1; transform: scale(1); }
-  65%  { opacity: 1; }
-  100% { opacity: 0; transform: scale(1.08); }
-}
-
-@keyframes textFadeOut {
-  0%   { opacity: 1; }
-  100% { opacity: 0; }
-}
-
+/* Modify existing .cover-tagline — make sure it sits over the video */
 .cover-tagline {
+  position: relative;
+  z-index: 2;
   font-family: var(--font-script);
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 400;
   color: var(--ink);
-  margin: 36px 0 0;
+  margin: 0;
   text-align: center;
-  line-height: 1;
+  line-height: 1.1;
+  text-shadow: 0 1px 6px rgba(255, 250, 240, 0.6);
+  opacity: 0;
+  animation: taglineIn 0.8s ease 0.6s forwards;
 }
 
+@keyframes taglineIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Lightly tweak skip-button — frosted pill for video bg */
 .skip-button {
   position: absolute;
   bottom: 24px;
-  right: 24px;
-  background: none;
+  right: 20px;
+  z-index: 3;
+  background: rgba(245, 242, 236, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: none;
   color: var(--ink);
   font-family: var(--font-sans);
@@ -171,16 +107,30 @@ body {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   cursor: pointer;
-  opacity: 0.35;
-  transition: opacity 0.2s ease;
-  padding: 10px 14px;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, background 0.2s ease;
+  padding: 10px 16px;
+  border-radius: 20px;
   -webkit-tap-highlight-color: transparent;
 }
 
 .skip-button:hover,
 .skip-button:focus-visible {
-  opacity: 0.85;
+  opacity: 1;
+  background: rgba(245, 242, 236, 0.75);
   outline: none;
+}
+
+/* ── Background photo section ──────────────────────── */
+.bg-photo-section {
+  position: relative;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(245, 242, 236, 0.86), rgba(245, 242, 236, 0.88)),
+    url('assets/bg-hands.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
 body.cover-opening .invitation {

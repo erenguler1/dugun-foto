@@ -6,9 +6,9 @@ const KINA_MAPS = "https://www.google.com/maps/search/?api=1&query=" +
 const DUGUN_MAPS = "https://www.google.com/maps/search/?api=1&query=" +
   encodeURIComponent("VAV BAHÇE Aşağı Söğütönü 1040. Sokak Tepebaşı Eskişehir");
 
-// ── Cover (wax seal) ───────────────────────
+// ── Cover (video) ──────────────────────────
 const cover = document.getElementById('cover');
-const waxSeal = document.getElementById('waxSeal');
+const coverVideo = document.getElementById('coverVideo');
 const skipButton = document.getElementById('skipButton');
 const music = document.getElementById('musicAudio');
 
@@ -16,37 +16,42 @@ document.body.style.overflow = 'hidden';
 
 function startMusic() {
   if (!music) return;
-  music.volume = 0.6;
-  music.play().catch(() => {});
+  music.volume = 0.55;
+  music.play().catch(() => { /* iOS may block without user gesture */ });
   const btn = document.getElementById('musicToggle');
   if (btn) btn.classList.add('playing');
 }
 
-function openInvitation(animated) {
+function dismissCover() {
+  if (cover.classList.contains('gone')) return;
   document.body.classList.add('cover-opening');
-  if (animated) {
-    cover.classList.add('zooming');
-    setTimeout(startMusic, 200);
-    setTimeout(() => {
-      cover.style.display = 'none';
-      document.body.style.overflow = '';
-    }, 1400);
-  } else {
-    cover.classList.add('gone');
-    startMusic();
-    setTimeout(() => {
-      cover.style.display = 'none';
-      document.body.style.overflow = '';
-    }, 900);
-  }
+  cover.classList.add('gone');
+  startMusic();
+  setTimeout(() => {
+    cover.style.display = 'none';
+    document.body.style.overflow = '';
+  }, 1000);
 }
 
-if (waxSeal && cover) {
-  waxSeal.addEventListener('click', () => openInvitation(true));
+if (coverVideo) {
+  coverVideo.addEventListener('ended', dismissCover);
+  // Safety: if video can't play (autoplay blocked / error), dismiss after 6s
+  setTimeout(() => {
+    if (!cover.classList.contains('gone') &&
+        (coverVideo.paused || coverVideo.readyState < 2)) {
+      dismissCover();
+    }
+  }, 6000);
 }
-if (skipButton && cover) {
-  skipButton.addEventListener('click', () => openInvitation(false));
+
+if (skipButton) {
+  skipButton.addEventListener('click', dismissCover);
 }
+
+// Final fail-safe
+setTimeout(() => {
+  if (!cover.classList.contains('gone')) dismissCover();
+}, 8000);
 
 // Music toggle
 const musicToggle = document.getElementById('musicToggle');

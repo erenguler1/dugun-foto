@@ -14,9 +14,10 @@
   <audio id="musicAudio" src="assets/music.mp3" loop preload="auto"></audio>
 
   <div class="cover" id="cover">
-    <button class="wax-seal" id="waxSeal" type="button" aria-label="Davetiyeyi aç">
-      <img src="assets/seal.png" alt="" />
-    </button>
+    <video class="cover-video" id="coverVideo"
+           src="assets/cover.mp4"
+           poster="assets/cover-poster.jpg"
+           autoplay muted playsinline preload="auto"></video>
     <p class="cover-tagline">Bu davetiye sana özeldir</p>
     <button class="skip-button" id="skipButton" type="button">ATLA &rsaquo;</button>
   </div>
@@ -28,6 +29,8 @@
         <path d="M9 3v12.5A3.5 3.5 0 1 0 11 19V6h7V3H9z"/>
       </svg>
     </button>
+
+    <section class="bg-photo-section">
 
     <!-- HERO — davetlisiniz -->
     <header class="hero">
@@ -93,6 +96,9 @@
     </section>
 
     <p class="events-note">Düğünümüz yemeklidir.</p>
+
+    </section>
+    <!-- /bg-photo-section -->
 
     <!-- COUNTDOWN -->
     <section class="countdown">
