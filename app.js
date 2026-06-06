@@ -6,9 +6,9 @@ const KINA_MAPS = "https://www.google.com/maps/search/?api=1&query=" +
 const DUGUN_MAPS = "https://www.google.com/maps/search/?api=1&query=" +
   encodeURIComponent("VAV BAHÇE Aşağı Söğütönü 1040. Sokak Tepebaşı Eskişehir");
 
-// ── Cover (video) ──────────────────────────
+// ── Cover (mini envelope + seal) ───────────
 const cover = document.getElementById('cover');
-const coverVideo = document.getElementById('coverVideo');
+const sealBtn = document.getElementById('sealBtn');
 const skipButton = document.getElementById('skipButton');
 const music = document.getElementById('musicAudio');
 
@@ -33,25 +33,18 @@ function dismissCover() {
   }, 1000);
 }
 
-if (coverVideo) {
-  coverVideo.addEventListener('ended', dismissCover);
-  // Safety: if video can't play (autoplay blocked / error), dismiss after 6s
-  setTimeout(() => {
-    if (!cover.classList.contains('gone') &&
-        (coverVideo.paused || coverVideo.readyState < 2)) {
-      dismissCover();
-    }
-  }, 6000);
+// Seal click breaks the wax, then opens the invitation
+if (sealBtn) {
+  sealBtn.addEventListener('click', () => {
+    sealBtn.classList.add('breaking');
+    setTimeout(dismissCover, 380);
+  });
 }
 
+// Skip dismisses immediately
 if (skipButton) {
   skipButton.addEventListener('click', dismissCover);
 }
-
-// Final fail-safe
-setTimeout(() => {
-  if (!cover.classList.contains('gone')) dismissCover();
-}, 8000);
 
 // Music toggle
 const musicToggle = document.getElementById('musicToggle');
