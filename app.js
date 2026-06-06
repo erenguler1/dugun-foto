@@ -25,9 +25,8 @@ function startMusic() {
 function openInvitation(animated) {
   document.body.classList.add('cover-opening');
   if (animated) {
-    waxSeal.classList.add('breaking');
-    setTimeout(() => cover.classList.add('gone'), 400);
-    setTimeout(startMusic, 500);
+    cover.classList.add('zooming');
+    setTimeout(startMusic, 200);
     setTimeout(() => {
       cover.style.display = 'none';
       document.body.style.overflow = '';

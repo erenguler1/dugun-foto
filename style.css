@@ -51,8 +51,43 @@ body {
   justify-content: center;
   padding: 40px 24px;
   box-sizing: border-box;
+  overflow: hidden;
   transition: opacity 0.8s ease;
 }
+
+/* ── Envelope folding creases (X-pattern + subtle flap shading) ─── */
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    /* 4 flap surfaces — very subtle tonal difference */
+    conic-gradient(from 45deg at 50% 50%,
+      rgba(255, 250, 240, 0.05) 0deg 90deg,
+      rgba(40, 30, 15, 0.025) 90deg 180deg,
+      rgba(40, 30, 15, 0.06) 180deg 270deg,
+      rgba(40, 30, 15, 0.025) 270deg 360deg),
+    /* X crease — diagonal "/" line */
+    linear-gradient(to top right,
+      transparent calc(50% - 0.6px),
+      rgba(60, 40, 20, 0.11) 50%,
+      transparent calc(50% + 0.6px)),
+    /* X crease — diagonal "\" line */
+    linear-gradient(to bottom right,
+      transparent calc(50% - 0.6px),
+      rgba(60, 40, 20, 0.11) 50%,
+      transparent calc(50% + 0.6px));
+}
+
+/* Seal + tagline + skip must sit ABOVE the crease overlay */
+.wax-seal,
+.cover-tagline {
+  position: relative;
+  z-index: 2;
+}
+.skip-button { z-index: 2; }
 
 .cover.gone {
   opacity: 0;
@@ -81,15 +116,37 @@ body {
   filter: drop-shadow(0 10px 22px rgba(60, 20, 24, 0.35));
 }
 
-.wax-seal.breaking {
-  animation: sealBreak 0.5s ease forwards;
+/* ── Zoom-through animation: scale + opacity ──────────── */
+.cover.zooming {
+  animation: coverZoomFade 1.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   pointer-events: none;
 }
 
-@keyframes sealBreak {
-  0%   { transform: scale(1) rotate(0); opacity: 1; }
-  45%  { transform: scale(1.15) rotate(-4deg); opacity: 1; }
-  100% { transform: scale(0.82) rotate(10deg); opacity: 0; }
+.cover.zooming .wax-seal img {
+  animation: sealZoom 1.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.cover.zooming .cover-tagline,
+.cover.zooming .skip-button,
+.cover.zooming::before {
+  animation: textFadeOut 0.35s ease forwards;
+}
+
+@keyframes sealZoom {
+  0%   { transform: scale(1); opacity: 1; }
+  55%  { transform: scale(7); opacity: 0.55; }
+  100% { transform: scale(30); opacity: 0; }
+}
+
+@keyframes coverZoomFade {
+  0%   { opacity: 1; transform: scale(1); }
+  65%  { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.08); }
+}
+
+@keyframes textFadeOut {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 .cover-tagline {
