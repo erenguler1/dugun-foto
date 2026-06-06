@@ -16,6 +16,7 @@ document.body.style.overflow = 'hidden';
 if (sealButton && cover) {
   sealButton.addEventListener('click', () => {
     sealButton.classList.add('breaking');
+    document.body.classList.add('cover-opening');
     // Flap rotates back
     setTimeout(() => cover.classList.add('flap-open'), 250);
     // Start music
@@ -28,11 +29,11 @@ if (sealButton && cover) {
       }
     }, 800);
     // Fade out cover entirely
-    setTimeout(() => cover.classList.add('gone'), 1500);
+    setTimeout(() => cover.classList.add('gone'), 1700);
     setTimeout(() => {
       cover.style.display = 'none';
       document.body.style.overflow = '';
-    }, 2300);
+    }, 2500);
   });
 }
 
