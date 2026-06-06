@@ -207,9 +207,9 @@ body {
       rgba(245, 242, 236, 0.85) 75%,
       rgba(245, 242, 236, 1.0) 100%),
     url('assets/bg-hands.jpg');
-  background-size: cover, 100% auto;
-  background-position: center, top center;
-  background-repeat: no-repeat, no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   padding-bottom: 60px;
 }
 
@@ -223,9 +223,9 @@ body {
       rgba(245, 242, 236, 0.62) 60%,
       rgba(245, 242, 236, 0.55) 100%),
     url('assets/bg-couple.jpg');
-  background-size: cover, 100% auto;
-  background-position: center, bottom center;
-  background-repeat: no-repeat, no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Seamless boundary: the wrappers abut and each photo's cream-fade gradient
