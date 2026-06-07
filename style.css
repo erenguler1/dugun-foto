@@ -559,9 +559,16 @@ body.cover-opening .invitation {
   pointer-events: none;
 }
 
+/* The serif "+" math glyph sits a hair above the flex line-box center, so it
+   reads slightly high. Nudge it down by an em-based amount (scales at any zoom)
+   to optically center the ink inside the circle. inline-flex lets the transform
+   apply cleanly while keeping the show/hide toggling on display. */
 .upload__btn[data-state="idle"] .upload__icon--plus,
 .upload__btn[data-state="uploading"] .upload__icon--plus {
-  display: inline;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(0.045em);
 }
 
 .upload__btn[data-state="uploading"] {
