@@ -53,6 +53,13 @@ function dismissCover() {
   }, 1000);
 }
 
+// Click anywhere on the cover (except the skip button) triggers the animated open
+cover.addEventListener('click', (e) => {
+  if (e.target.closest('#skipButton')) return;
+  if (sealBtn) sealBtn.classList.add('breaking');
+  setTimeout(dismissCover, 380);
+});
+
 // Seal click breaks the wax, then opens the invitation
 if (sealBtn) {
   sealBtn.addEventListener('click', () => {

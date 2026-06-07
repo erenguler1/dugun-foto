@@ -1,11 +1,19 @@
+@font-face {
+  font-family: 'Billion Miracles';
+  src: url('assets/fonts/Billion_Miracles_Personal_Use_Only.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
 :root {
   --bg: #f5f2ec;
   --ink: #2a1f10;
   --ink-soft: #6b5d44;
 
-  /* Lisans alınınca FONT_SCRIPT'in başına 'Billion Miracles' eklenecek —
-     şu an en yakın ücretsiz Google Font alternatifi Marck Script. */
-  --font-script: 'Italianno', 'Sacramento', 'Allura', cursive;
+  /* Billion Miracles (personal-use TTF, self-hosted) drives the script look;
+     Italianno/Sacramento stay as fallbacks if the font fails to load. */
+  --font-script: 'Billion Miracles', 'Italianno', 'Sacramento', cursive;
   --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-sans: "Inter", -apple-system, sans-serif;
 }
