@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'Billion Miracles';
-  src: url('assets/fonts/Billion_Miracles_Personal_Use_Only.ttf') format('truetype');
+  src: url('assets/fonts/Billion_Miracles_Fixed.woff2') format('woff2'),
+       url('assets/fonts/Billion_Miracles_Personal_Use_Only.ttf') format('truetype');
   font-display: swap;
   font-weight: 400;
   font-style: normal;
