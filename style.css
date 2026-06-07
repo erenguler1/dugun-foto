@@ -568,7 +568,7 @@ body.cover-opening .invitation {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transform: translateY(0.045em);
+  transform: translateY(-0.08em);
 }
 
 .upload__btn[data-state="uploading"] {
