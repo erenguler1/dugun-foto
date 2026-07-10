@@ -689,7 +689,7 @@ body.cover-opening .invitation {
   display: inline-block;
   text-align: center;
   margin-top: 12px;
-  padding: 12px 22px;
+  padding: 11px 20px;
   border: 1px solid rgba(42, 31, 16, 0.35);
   border-radius: 2px;
   color: var(--ink);
@@ -711,14 +711,14 @@ body.cover-opening .invitation {
 
 .signature__brand {
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 3px;
+  letter-spacing: 2.5px;
 }
 
 .signature__word {
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 400;
   letter-spacing: 0.5px;
   opacity: 0.8;
@@ -738,21 +738,21 @@ body.cover-opening .invitation {
 }
 
 .signature__icon {
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   flex-shrink: 0;
 }
 
 .signature__cta {
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
   letter-spacing: 1px;
 }
 
 .signature__arrow {
   margin-left: -1px;
-  font-size: 12px;
+  font-size: 11px;
   transition: transform 0.3s ease;
 }
 
